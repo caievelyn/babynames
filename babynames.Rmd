@@ -25,13 +25,30 @@ babynames %>%
 ```
 
 ```{r babynames_top1000}
-top1000 <- babynames %>%
-  filter(year == 2017) %>%
+top100 <- babynames %>%
+  filter(year == max(year)) %>%
   arrange(desc(n)) %>%
-  head(1000) 
+  head(100)
+```
+
+``` {r join}
+new100 <- babynames %>%
+  inner_join(top100, "name")
+```
+
+``` {r plot}
+new100 %>%
+  filter(year.x == min(year.x) | year.x == max(year.x)) %>%
+  
   
 ```
 
 notes: 
 summary(year) tells you more about max and min
 slice(1:1000) does the same thing as head(1000)
+
+Questions about the dataset
+- if names shift from being commonly male to female or vice versa
+- whether most popular names have been fads/classics thru looking at their densities per year
+- length of popular names
+- nicknames spawning off of a long name and becoming more popular
