@@ -1,0 +1,37 @@
+---
+title: "babynames"
+author: "Evelyn Cai"
+date: "1/29/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(babynames)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+```
+
+
+
+```{r babynames}
+babynames %>%
+  filter(name %in% c("Evelyn", "Ruth", "Michelle")) %>%
+  group_by(sex) %>%
+  ggplot(mapping = aes(x = year, y = n, fill = name)) +
+           geom_col() + facet_wrap(~sex)
+  
+```
+
+```{r babynames_top1000}
+top1000 <- babynames %>%
+  filter(year == 2017) %>%
+  arrange(desc(n)) %>%
+  head(1000) 
+  
+```
+
+notes: 
+summary(year) tells you more about max and min
+slice(1:1000) does the same thing as head(1000)
