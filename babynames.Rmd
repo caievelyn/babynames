@@ -37,8 +37,13 @@ new100 <- babynames %>%
 ```
 
 ``` {r plot}
-new100 %>%
-  filter(year.x == min(year.x) | year.x == max(year.x)) %>%
+top1000 <- babynames %>%
+  filter(year==max(year)) %>% 
+  arrange(desc(n)) %>%
+  slice(1:1000)
+
+x1000 <- babynames %>%
+  inner_join(top1000, "name")
   
   
 ```
